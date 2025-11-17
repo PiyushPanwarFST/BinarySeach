@@ -1,0 +1,33 @@
+
+# Binary Search Code but getting TLE
+
+from typing import List
+
+
+class Solution:
+    def findPair(self, arr: List[int], x: int) -> int:
+        n = len(arr)
+        arr.sort()
+        
+        for i in range(n):
+            target = arr[i] + x
+            if self.binary_search(arr, i+1, n-1, target):
+                return True
+        return False
+            
+    def binary_search(self, arr, low, high, key):
+        while low <= high:
+            mid = low + (high - low) // 2
+            
+            if arr[mid] == key:
+                return True
+                
+            elif arr[mid] < key:
+                low = mid + 1
+                
+            elif arr[mid] > key:
+                high = mid - 1
+
+        return False
+        
+
