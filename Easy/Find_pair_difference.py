@@ -18,10 +18,9 @@ Constraints:
 0<= x <=10
 
 
-# Binary Search Code but getting TLE
 from typing import List
-
 class Solution:
+    # Linear Search Approach
     def findPair(self, arr: List[int], x: int) -> int:
         n = len(arr)
         arr.sort()
@@ -31,7 +30,8 @@ class Solution:
             if self.binary_search(arr, i+1, n-1, target):
                 return True
         return False
-            
+
+    # Binary Search Code but getting TLE 
     def binary_search(self, arr, low, high, key):
         while low <= high:
             mid = low + (high - low) // 2
@@ -44,19 +44,17 @@ class Solution:
                 
             elif arr[mid] > key:
                 high = mid - 1
-        
+
         return False
-    
-# Two Pointer Approach
+     
+    # Two - Pointer apporach :
     def findPair(self, arr: List[int], x: int) -> int:
         i = 0
         j = i + 1
         n = len(arr)
-        
         arr.sort()
         
         while j < n:
-            
             diff = arr[j] - arr[i]
             
             if i == j:
@@ -71,6 +69,23 @@ class Solution:
             
             elif diff > x:
                 i += 1
-                
-        return False   
+      
+        return False
 
+    # Hashing Approach 
+    def findPair(self, arr: List[int], x: int) -> int:
+        st = set()
+        
+        for num in arr:
+            if ((num - x) in st) or ((num + x) in st) :
+                return True
+            
+            st.add(num)
+
+        return False       
+    
+if __name__ == "__main__":
+    arr = [1, 2, 3, 4, 6]
+    k = 8
+    obj = Solution()
+    print(obj.searchInSorted(arr, k))  
